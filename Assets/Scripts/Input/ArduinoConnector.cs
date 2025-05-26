@@ -89,7 +89,7 @@ public class ArduinoConnector : MonoBehaviour
     void SimulateInput()
     {
         if (Input.GetKeyDown(KeyCode.W))
-        { 
+        {
             OnArduinoInputReceived?.Invoke(RemoteCommands.UP);
         }
         else if (Input.GetKeyDown(KeyCode.S))
@@ -103,6 +103,14 @@ public class ArduinoConnector : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.D))
         {
             OnArduinoInputReceived?.Invoke(RemoteCommands.RIGHT);
+        }
+        else if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            OnArduinoInputReceived?.Invoke(RemoteCommands.PROGRAM_UP);
+        }
+        else if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            OnArduinoInputReceived?.Invoke(RemoteCommands.PROGRAM_DOWN);
         }
     }
 

@@ -7,11 +7,12 @@ public class ChannelChanger : MonoBehaviour
     // Singleton instance
     public static ChannelChanger Instance { get; private set; }
 
-    public List<GameObject> channelList;
+    List<GameObject> channelList;
     int currentChannelIndex = 0;
 
     PlayerMovement playerMovement;
     CameraShake cameraShake; // Reference to the CameraShake script
+    GameObject channelHolder;
 
     private void Awake()
     {
@@ -31,6 +32,21 @@ public class ChannelChanger : MonoBehaviour
     {
         playerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
         cameraShake = Camera.main.GetComponent<CameraShake>(); // Assuming the main camera has the CameraShake script
+        
+        if(channelList != null)
+        {
+            channelList.Clear();
+        }
+        else
+        {
+            channelList = new List<GameObject>();
+        }
+
+        channelHolder = GameObject.Find("ChannelHolder");
+        for (int i = 0; i < channelHolder.transform.childCount; i++)
+        {
+            channelList.Add(channelHolder.transform.GetChild(i).gameObject);
+        }
     }
 
     private void OnEnable()

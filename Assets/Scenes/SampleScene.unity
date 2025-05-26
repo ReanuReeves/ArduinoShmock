@@ -9168,6 +9168,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66bc2291d1bb68a4c97938e9cee538a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  notObstructing:
+    serializedVersion: 2
+    m_Bits: 55
 --- !u!1 &817506689
 GameObject:
   m_ObjectHideFlags: 0
@@ -9493,6 +9496,7 @@ GameObject:
   m_Component:
   - component: {fileID: 832575519}
   - component: {fileID: 832575518}
+  - component: {fileID: 832575520}
   m_Layer: 0
   m_Name: Global Volume
   m_TagString: Untagged
@@ -9532,6 +9536,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &832575520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 832575517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4db53aa9ce4127240bbca22cbbaca1f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &837059684
 GameObject:
   m_ObjectHideFlags: 0
@@ -14296,7 +14312,7 @@ GameObject:
   - component: {fileID: 1281810015}
   - component: {fileID: 1281810014}
   - component: {fileID: 1281810013}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Objective
   m_TagString: Objective
   m_Icon: {fileID: 0}

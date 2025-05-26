@@ -4,6 +4,7 @@ using System.Collections;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public LayerMask notObstructing;
     private Dictionary<string, Vector3> commandToDirection;
 
     IEnumerator moveCoroutine; // Reference to the coroutine for movement
@@ -41,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
 
             RaycastHit hit;
             Debug.Log("Command: " + command + " Direction: " + direction);
-            if (!Physics.Raycast(transform.position, direction, out hit, 1f))
+            if (!Physics.Raycast(transform.position, direction, out hit, 1f, notObstructing))
             {
                 moveCoroutine = Move(direction);
                 StartCoroutine(moveCoroutine); // Start the movement coroutine
