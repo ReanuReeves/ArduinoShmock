@@ -1,6 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement; // Required for scene management
+using System.Collections.Generic; // Required for List<T>
 
 public class ChannelChanger : MonoBehaviour
 {
@@ -32,8 +32,35 @@ public class ChannelChanger : MonoBehaviour
     {
         playerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
         cameraShake = Camera.main.GetComponent<CameraShake>(); // Assuming the main camera has the CameraShake script
-        
-        if(channelList != null)
+
+        RefreshChannelList(); // Initialize the channel list
+    }
+
+    
+
+    private void OnEnable()
+    {
+        ArduinoConnector.OnArduinoInputReceived += HandleArduinoInput;
+        SceneManager.sceneLoaded += OnSceneLoaded; // Subscribe to sceneLoaded event
+    }
+
+    private void OnDisable()
+    {
+        ArduinoConnector.OnArduinoInputReceived -= HandleArduinoInput;
+        SceneManager.sceneLoaded -= OnSceneLoaded; // Unsubscribe from sceneLoaded event
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        RefreshChannelList(); // Refresh the channel list when a new scene is loaded
+        playerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
+        cameraShake = Camera.main.GetComponent<CameraShake>(); // Reassign the CameraShake script reference
+        currentChannelIndex = 0; // Reset to the first channel when a new scene is loaded
+    }
+
+    void RefreshChannelList()
+    {
+        if (channelList != null)
         {
             channelList.Clear();
         }
@@ -43,20 +70,13 @@ public class ChannelChanger : MonoBehaviour
         }
 
         channelHolder = GameObject.Find("ChannelHolder");
-        for (int i = 0; i < channelHolder.transform.childCount; i++)
+        if (channelHolder != null)
         {
-            channelList.Add(channelHolder.transform.GetChild(i).gameObject);
+            for (int i = 0; i < channelHolder.transform.childCount; i++)
+            {
+                channelList.Add(channelHolder.transform.GetChild(i).gameObject);
+            }
         }
-    }
-
-    private void OnEnable()
-    {
-        ArduinoConnector.OnArduinoInputReceived += HandleArduinoInput;
-    }
-
-    private void OnDisable()
-    {
-        ArduinoConnector.OnArduinoInputReceived -= HandleArduinoInput;
     }
 
     void HandleArduinoInput(string command)

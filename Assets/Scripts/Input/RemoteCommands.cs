@@ -18,6 +18,7 @@
     public const string DOWN = "0x59";
     public const string TEXT = "0x3C";
     public const string BACK = "0x55";
+    public const string OK = "0x3B"; // DOUBLE CHECK THIS
     public const string C = "0x3A";
     public const string REWIND = "0x21";
     public const string FORWARD = "0x20";

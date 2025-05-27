@@ -18,7 +18,7 @@ public class WinningPosition : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Debug.Log("Player has reached the winning position!");
-            levelManager.OnLevelCompletion();
+            StartCoroutine(levelManager.OnLevelCompletion());
         }
     }
 }
